@@ -1,0 +1,409 @@
+<!doctype html>
+<html lang="tr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>Farzet - Portfolio</title>
+    <meta name="description" content="Farzet - Developer, Creator, Designer. Explore my work and projects.">
+    <link rel="icon" type="image/png" href="assets/profile.jpg">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- ========== INTRO ANIMATION (PRESERVED) ========== -->
+    <div id="intro-overlay">
+        <svg viewBox="0 0 400 150" width="400" height="150">
+            <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" class="handwriting-text">
+                Farzet
+            </text>
+        </svg>
+    </div>
+
+    <!-- ========== BACKGROUND VIDEO ========== -->
+    <video class="bg-video" id="bgVideo" muted autoplay loop playsinline>
+        <source src="assets/video.mp4" type="video/mp4">
+    </video>
+
+    <!-- ========== NAVIGATION ========== -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#home" class="nav-logo">
+                <img src="assets/profile.jpg" alt="Farzet" class="nav-logo-img">
+                <span>Farzet</span>
+            </a>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#home" class="nav-link active">Home</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#projects" class="nav-link">Projects</a></li>
+                <li><a href="#skills" class="nav-link">Skills</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <div class="nav-toggle" id="navToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ========== MAIN CONTENT ========== -->
+    <main class="main-content" id="mainContent">
+
+        <!-- ========== HOME SECTION ========== -->
+        <section class="section home-section" id="home">
+            <div class="container">
+                <div class="hero-content">
+                    <div class="hero-image-container">
+                        <img src="assets/profile.jpg" alt="Farzet" class="hero-image" id="heroImage">
+                        <div class="hero-image-ring"></div>
+                    </div>
+                    <div class="hero-text">
+                        <h1 class="hero-title">
+                            <span class="hero-greeting">Hello, I'm</span>
+                            <span class="hero-name gradient-text">Farzet</span>
+                        </h1>
+                        <p class="hero-subtitle">Developer • Creator • Designer</p>
+                        <p class="hero-description">
+                            Crafting digital experiences with passion and precision.
+                            I bring ideas to life through code and creativity.
+                        </p>
+                        <div class="hero-cta">
+                            <a href="#projects" class="btn btn-primary">View My Work</a>
+                            <a href="#contact" class="btn btn-secondary">Get In Touch</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Social Dock -->
+                <div class="social-dock" id="socialDock">
+                    <a href="https://discord.gg/mvHVwB7JvU" target="_blank" class="social-link" data-tooltip="Discord">
+                        <img src="https://cdn.prod.website-files.com/6257adef93867e50d84d30e2/66e278299a53f5bf88615e90_Symbol.svg" alt="Discord">
+                    </a>
+                    <a href="https://open.spotify.com/intl-tr/artist/2d19Oe2zxKwqPY6qzWBIrQ?si=40af4f0b3bd841a3N" target="_blank" class="social-link" data-tooltip="Spotify">
+                        <img src="https://storage.googleapis.com/pr-newsroom-wp/1/2023/05/Spotify_Primary_Logo_RGB_White.png" alt="Spotify">
+                    </a>
+                    <a href="https://www.instagram.com/farzetyokumben" target="_blank" class="social-link" data-tooltip="Instagram">
+                        <img src="https://cdn-icons-png.flaticon.com/512/1384/1384063.png" alt="Instagram">
+                    </a>
+                    <a href="https://github.com/farzetyokumben" target="_blank" class="social-link" data-tooltip="GitHub">
+                        <img src="https://cdn-icons-png.flaticon.com/512/733/733553.png" alt="GitHub">
+                    </a>
+                    <a href="mailto:berke@farzet.xyz" target="_blank" class="social-link" data-tooltip="Email">
+                        <img src="https://cdn-icons-png.flaticon.com/512/646/646135.png" alt="Email">
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========== ABOUT SECTION ========== -->
+        <section class="section about-section" id="about">
+            <div class="container">
+                <h2 class="section-title">About Me</h2>
+                <div class="about-content">
+                    <div class="about-card glass-card">
+                        <div class="about-icon">👨‍💻</div>
+                        <h3>Who I Am</h3>
+                        <p>
+                            I'm a passionate developer and creative mind who loves building innovative digital solutions.
+                            With a strong foundation in modern web technologies, I strive to create experiences that are
+                            both beautiful and functional.
+                        </p>
+                    </div>
+                    <div class="about-card glass-card">
+                        <div class="about-icon">🎯</div>
+                        <h3>What I Do</h3>
+                        <p>
+                            I specialize in full-stack development, UI/UX design, and creating interactive web experiences.
+                            From concept to deployment, I handle every aspect of bringing digital products to life.
+                        </p>
+                    </div>
+                    <div class="about-card glass-card">
+                        <div class="about-icon">🚀</div>
+                        <h3>My Vision</h3>
+                        <p>
+                            I believe in the power of technology to transform ideas into reality. My goal is to push
+                            boundaries, learn continuously, and contribute to projects that make a difference.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========== PROJECTS SECTION ========== -->
+        <section class="section projects-section" id="projects">
+            <div class="container">
+                <h2 class="section-title">Featured Projects</h2>
+                <div class="projects-grid">
+
+                    <div class="project-card glass-card">
+                        <div class="project-image">
+                            <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&q=80" alt="Project 1">
+                            <div class="project-overlay">
+                                <a href="#" class="project-link">View Project →</a>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <h3>Modern Web Platform</h3>
+                            <p>A full-stack web application built with React, Node.js, and MongoDB featuring real-time collaboration.</p>
+                            <div class="project-tags">
+                                <span class="tag">React</span>
+                                <span class="tag">Node.js</span>
+                                <span class="tag">MongoDB</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project-card glass-card">
+                        <div class="project-image">
+                            <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?w=800&q=80" alt="Project 2">
+                            <div class="project-overlay">
+                                <a href="#" class="project-link">View Project →</a>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <h3>AI-Powered Dashboard</h3>
+                            <p>An intelligent analytics dashboard with machine learning integration for data visualization.</p>
+                            <div class="project-tags">
+                                <span class="tag">Python</span>
+                                <span class="tag">TensorFlow</span>
+                                <span class="tag">Vue.js</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project-card glass-card">
+                        <div class="project-image">
+                            <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80" alt="Project 3">
+                            <div class="project-overlay">
+                                <a href="#" class="project-link">View Project →</a>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <h3>E-Commerce Platform</h3>
+                            <p>A modern e-commerce solution with payment integration and real-time inventory management.</p>
+                            <div class="project-tags">
+                                <span class="tag">Next.js</span>
+                                <span class="tag">Stripe</span>
+                                <span class="tag">PostgreSQL</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project-card glass-card">
+                        <div class="project-image">
+                            <img src="https://images.unsplash.com/photo-1558655146-9f40138edfeb?w=800&q=80" alt="Project 4">
+                            <div class="project-overlay">
+                                <a href="#" class="project-link">View Project →</a>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <h3>Mobile Design System</h3>
+                            <p>A comprehensive design system and component library for cross-platform mobile applications.</p>
+                            <div class="project-tags">
+                                <span class="tag">React Native</span>
+                                <span class="tag">TypeScript</span>
+                                <span class="tag">Figma</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ========== SKILLS SECTION ========== -->
+        <section class="section skills-section" id="skills">
+            <div class="container">
+                <h2 class="section-title">Skills & Technologies</h2>
+                <div class="skills-container">
+
+                    <div class="skill-category glass-card">
+                        <h3 class="skill-category-title">Frontend</h3>
+                        <div class="skills-list">
+                            <div class="skill-item">
+                                <span class="skill-name">HTML/CSS</span>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" data-progress="95"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <span class="skill-name">JavaScript</span>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" data-progress="90"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <span class="skill-name">React.js</span>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" data-progress="88"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <span class="skill-name">Vue.js</span>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" data-progress="82"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="skill-category glass-card">
+                        <h3 class="skill-category-title">Backend</h3>
+                        <div class="skills-list">
+                            <div class="skill-item">
+                                <span class="skill-name">Node.js</span>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" data-progress="85"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <span class="skill-name">Python</span>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" data-progress="80"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <span class="skill-name">MongoDB</span>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" data-progress="78"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <span class="skill-name">PostgreSQL</span>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" data-progress="75"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="skill-category glass-card">
+                        <h3 class="skill-category-title">Tools & Design</h3>
+                        <div class="skills-list">
+                            <div class="skill-item">
+                                <span class="skill-name">Git</span>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" data-progress="92"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <span class="skill-name">Figma</span>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" data-progress="86"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <span class="skill-name">Docker</span>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" data-progress="75"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <span class="skill-name">Adobe Suite</span>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" data-progress="80"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Tech Stack Icons -->
+                <div class="tech-stack">
+                    <h3 class="tech-stack-title">Technologies I Work With</h3>
+                    <div class="tech-icons">
+                        <div class="tech-icon" data-tooltip="React">⚛️</div>
+                        <div class="tech-icon" data-tooltip="Node.js">🟢</div>
+                        <div class="tech-icon" data-tooltip="Python">🐍</div>
+                        <div class="tech-icon" data-tooltip="TypeScript">📘</div>
+                        <div class="tech-icon" data-tooltip="MongoDB">🍃</div>
+                        <div class="tech-icon" data-tooltip="Docker">🐳</div>
+                        <div class="tech-icon" data-tooltip="Git">🔧</div>
+                        <div class="tech-icon" data-tooltip="Figma">🎨</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========== CONTACT SECTION ========== -->
+        <section class="section contact-section" id="contact">
+            <div class="container">
+                <h2 class="section-title">Get In Touch</h2>
+                <div class="contact-content">
+                    <div class="contact-info">
+                        <h3>Let's Work Together</h3>
+                        <p>
+                            I'm always open to discussing new projects, creative ideas, or opportunities to be part of your vision.
+                        </p>
+                        <div class="contact-methods">
+                            <div class="contact-method">
+                                <div class="contact-icon">📧</div>
+                                <div>
+                                    <h4>Email</h4>
+                                    <a href="mailto:berke@farzet.xyz">berke@farzet.xyz</a>
+                                </div>
+                            </div>
+                            <div class="contact-method">
+                                <div class="contact-icon">💼</div>
+                                <div>
+                                    <h4>GitHub</h4>
+                                    <a href="https://github.com/farzetyokumben" target="_blank">@farzetyokumben</a>
+                                </div>
+                            </div>
+                            <div class="contact-method">
+                                <div class="contact-icon">🎮</div>
+                                <div>
+                                    <h4>Discord</h4>
+                                    <a href="https://discord.gg/mvHVwB7JvU" target="_blank">Join Server</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <form class="contact-form glass-card" id="contactForm">
+                        <div class="form-group">
+                            <input type="text" id="name" name="name" placeholder=" " required>
+                            <label for="name">Your Name</label>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" id="email" name="email" placeholder=" " required>
+                            <label for="email">Your Email</label>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="subject" name="subject" placeholder=" " required>
+                            <label for="subject">Subject</label>
+                        </div>
+                        <div class="form-group">
+                            <textarea id="message" name="message" rows="5" placeholder=" " required></textarea>
+                            <label for="message">Your Message</label>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-full">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ========== FOOTER ========== -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Farzet. Crafted with passion and code.</p>
+            <div class="footer-links">
+                <a href="https://farzet.xyz">farzet.xyz</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ========== SCROLL TO TOP ========== -->
+    <button class="scroll-to-top" id="scrollToTop">
+        ↑
+    </button>
+
+    <script src="script.js"></script>
+</body>
+</html>
