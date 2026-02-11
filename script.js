@@ -10,7 +10,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const navLinks = document.querySelectorAll('.nav-link');
     const mainContent = document.getElementById('mainContent');
     const introOverlay = document.getElementById('intro-overlay');
-    const bgVideo = document.getElementById('bgVideo');
     const heroImage = document.getElementById('heroImage');
     const heroText = document.querySelector('.hero-text');
     const heroImageContainer = document.querySelector('.hero-image-container');
@@ -18,8 +17,81 @@ document.addEventListener('DOMContentLoaded', () => {
     const scrollToTopBtn = document.getElementById('scrollToTop');
     const contactForm = document.getElementById('contactForm');
 
-    // ========== VIDEO AUTOPLAY ==========
-    bgVideo.play().catch(() => console.log("Video autoplay prevented"));
+    // ========== PARTICLE SYSTEM ==========
+    const canvas = document.getElementById('particleCanvas');
+    const ctx = canvas.getContext('2d');
+
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    window.addEventListener('resize', () => {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    });
+
+    class Particle {
+        constructor() {
+            this.x = Math.random() * canvas.width;
+            this.y = Math.random() * canvas.height;
+            this.size = Math.random() * 2 + 0.5;
+            this.speedX = Math.random() * 0.5 - 0.25;
+            this.speedY = Math.random() * 0.5 - 0.25;
+            this.opacity = Math.random() * 0.5 + 0.2;
+        }
+
+        update() {
+            this.x += this.speedX;
+            this.y += this.speedY;
+
+            if (this.x > canvas.width) this.x = 0;
+            if (this.x < 0) this.x = canvas.width;
+            if (this.y > canvas.height) this.y = 0;
+            if (this.y < 0) this.y = canvas.height;
+        }
+
+        draw() {
+            ctx.fillStyle = `rgba(99, 102, 241, ${this.opacity})`;
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+            ctx.fill();
+        }
+    }
+
+    const particles = [];
+    for (let i = 0; i < 100; i++) {
+        particles.push(new Particle());
+    }
+
+    function animateParticles() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        particles.forEach(particle => {
+            particle.update();
+            particle.draw();
+        });
+
+        // Draw connections
+        for (let i = 0; i < particles.length; i++) {
+            for (let j = i + 1; j < particles.length; j++) {
+                const dx = particles[i].x - particles[j].x;
+                const dy = particles[i].y - particles[j].y;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+
+                if (distance < 150) {
+                    ctx.strokeStyle = `rgba(99, 102, 241, ${0.15 * (1 - distance / 150)})`;
+                    ctx.lineWidth = 0.5;
+                    ctx.beginPath();
+                    ctx.moveTo(particles[i].x, particles[i].y);
+                    ctx.lineTo(particles[j].x, particles[j].y);
+                    ctx.stroke();
+                }
+            }
+        }
+
+        requestAnimationFrame(animateParticles);
+    }
+
+    animateParticles();
 
     // ========== INTRO ANIMATION SEQUENCE ==========
     setTimeout(() => {
@@ -102,21 +174,32 @@ document.addEventListener('DOMContentLoaded', () => {
 
     sections.forEach(section => navObserver.observe(section));
 
-    // ========== SCROLL ANIMATIONS ==========
+    // ========== ENHANCED SCROLL ANIMATIONS WITH STAGGER ==========
     const animateOnScroll = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                entry.target.classList.add('animate');
+                // Add stagger animation delay based on element index
+                const parent = entry.target.parentElement;
+                const siblings = Array.from(parent.children).filter(child =>
+                    child.classList.contains(entry.target.classList[0])
+                );
+                const index = siblings.indexOf(entry.target);
 
-                // Animate skill progress bars
-                if (entry.target.classList.contains('skill-category')) {
-                    const progressBars = entry.target.querySelectorAll('.skill-progress');
-                    progressBars.forEach(bar => {
-                        const progress = bar.getAttribute('data-progress');
-                        bar.style.setProperty('--progress-width', `${progress}%`);
-                        bar.classList.add('animate');
-                    });
-                }
+                setTimeout(() => {
+                    entry.target.classList.add('animate');
+
+                    // Animate skill progress bars
+                    if (entry.target.classList.contains('skill-category')) {
+                        const progressBars = entry.target.querySelectorAll('.skill-progress');
+                        progressBars.forEach((bar, i) => {
+                            setTimeout(() => {
+                                const progress = bar.getAttribute('data-progress');
+                                bar.style.setProperty('--progress-width', `${progress}%`);
+                                bar.classList.add('animate');
+                            }, i * 100);
+                        });
+                    }
+                }, index * 100);
             }
         });
     }, {
@@ -196,53 +279,136 @@ document.addEventListener('DOMContentLoaded', () => {
         contactForm.reset();
     });
 
-    // ========== NOTIFICATION SYSTEM ==========
+    // ========== ENHANCED TOAST NOTIFICATION SYSTEM ==========
+    const toastContainer = document.createElement('div');
+    toastContainer.className = 'toast-container';
+    toastContainer.style.cssText = `
+        position: fixed;
+        top: 100px;
+        right: 20px;
+        z-index: 10000;
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        pointer-events: none;
+    `;
+    document.body.appendChild(toastContainer);
+
     function showNotification(message, type = 'info') {
-        const notification = document.createElement('div');
-        notification.className = `notification notification-${type}`;
-        notification.textContent = message;
-        notification.style.cssText = `
-            position: fixed;
-            top: 100px;
-            right: 20px;
-            background: rgba(99, 102, 241, 0.95);
-            color: white;
-            padding: 1rem 2rem;
-            border-radius: 10px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            z-index: 10000;
-            animation: slideIn 0.5s ease;
-            backdrop-filter: blur(10px);
+        const icons = {
+            success: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>`,
+            error: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg>`,
+            info: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>`,
+            warning: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>`
+        };
+
+        const colors = {
+            success: { bg: 'rgba(16, 185, 129, 0.95)', border: '#10b981' },
+            error: { bg: 'rgba(239, 68, 68, 0.95)', border: '#ef4444' },
+            info: { bg: 'rgba(99, 102, 241, 0.95)', border: '#6366f1' },
+            warning: { bg: 'rgba(245, 158, 11, 0.95)', border: '#f59e0b' }
+        };
+
+        const toast = document.createElement('div');
+        toast.className = `toast toast-${type}`;
+        toast.innerHTML = `
+            <div class="toast-icon">${icons[type] || icons.info}</div>
+            <div class="toast-message">${message}</div>
+            <button class="toast-close">×</button>
         `;
 
-        document.body.appendChild(notification);
+        const color = colors[type] || colors.info;
+        toast.style.cssText = `
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: ${color.bg};
+            color: white;
+            padding: 16px 20px;
+            border-radius: 12px;
+            border-left: 4px solid ${color.border};
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3), 0 0 1px rgba(255, 255, 255, 0.1) inset;
+            backdrop-filter: blur(10px);
+            min-width: 300px;
+            max-width: 400px;
+            pointer-events: auto;
+            animation: toastSlideIn 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            transform-origin: right center;
+            font-family: 'Poppins', sans-serif;
+        `;
 
-        setTimeout(() => {
-            notification.style.animation = 'slideOut 0.5s ease';
-            setTimeout(() => notification.remove(), 500);
-        }, 3000);
+        const closeBtn = toast.querySelector('.toast-close');
+        closeBtn.style.cssText = `
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            transition: all 0.2s ease;
+            margin-left: auto;
+        `;
+
+        const icon = toast.querySelector('.toast-icon');
+        icon.style.cssText = `
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        `;
+
+        const msgEl = toast.querySelector('.toast-message');
+        msgEl.style.cssText = `
+            flex: 1;
+            font-size: 14px;
+            line-height: 1.5;
+        `;
+
+        toastContainer.appendChild(toast);
+
+        const removeToast = () => {
+            toast.style.animation = 'toastSlideOut 0.3s ease forwards';
+            setTimeout(() => toast.remove(), 300);
+        };
+
+        closeBtn.addEventListener('click', removeToast);
+        closeBtn.addEventListener('mouseenter', () => {
+            closeBtn.style.background = 'rgba(255, 255, 255, 0.3)';
+            closeBtn.style.transform = 'scale(1.1)';
+        });
+        closeBtn.addEventListener('mouseleave', () => {
+            closeBtn.style.background = 'rgba(255, 255, 255, 0.2)';
+            closeBtn.style.transform = 'scale(1)';
+        });
+
+        setTimeout(removeToast, 5000);
     }
 
     // Add notification animations
     const style = document.createElement('style');
     style.textContent = `
-        @keyframes slideIn {
+        @keyframes toastSlideIn {
             from {
-                transform: translateX(400px);
+                transform: translateX(400px) scale(0.9);
                 opacity: 0;
             }
             to {
-                transform: translateX(0);
+                transform: translateX(0) scale(1);
                 opacity: 1;
             }
         }
-        @keyframes slideOut {
+        @keyframes toastSlideOut {
             from {
-                transform: translateX(0);
+                transform: translateX(0) scale(1);
                 opacity: 1;
             }
             to {
-                transform: translateX(400px);
+                transform: translateX(400px) scale(0.9);
                 opacity: 0;
             }
         }
