@@ -863,6 +863,65 @@ body {
 }
 
 /* =========================================
+   LOAD MORE SECTION
+   ========================================= */
+.load-more-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 3rem;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.8s ease forwards 0.5s;
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.load-more-btn {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s var(--ease-premium);
+}
+
+.load-more-btn svg {
+    transition: transform 0.3s var(--ease-premium);
+}
+
+.load-more-btn:hover svg {
+    transform: translateY(3px);
+}
+
+.load-more-btn.hidden {
+    opacity: 0;
+    pointer-events: none;
+    transform: scale(0.9);
+}
+
+.hidden-project {
+    display: none;
+    opacity: 0;
+    transform: scale(0.9) translateY(30px);
+}
+
+.hidden-project.reveal {
+    display: block;
+    animation: revealProject 0.6s var(--ease-premium) forwards;
+}
+
+@keyframes revealProject {
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+/* =========================================
    CONTACT SECTION
    ========================================= */
 .contact-content {

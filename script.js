@@ -499,6 +499,48 @@ document.addEventListener('DOMContentLoaded', () => {
 
     images.forEach(img => imageObserver.observe(img));
 
+    // ========== LOAD MORE PROJECTS ==========
+    const loadMoreBtn = document.getElementById('loadMoreBtn');
+    const hiddenProjects = document.querySelectorAll('.hidden-project');
+    let projectsRevealed = 0;
+    const projectsPerLoad = 2;
+
+    if (loadMoreBtn) {
+        loadMoreBtn.addEventListener('click', () => {
+            // Calculate how many projects to reveal
+            const projectsToReveal = Math.min(projectsPerLoad, hiddenProjects.length - projectsRevealed);
+
+            // Reveal projects with stagger animation
+            for (let i = 0; i < projectsToReveal; i++) {
+                const projectIndex = projectsRevealed + i;
+                if (projectIndex < hiddenProjects.length) {
+                    setTimeout(() => {
+                        hiddenProjects[projectIndex].classList.add('reveal');
+                    }, i * 150);
+                }
+            }
+
+            projectsRevealed += projectsToReveal;
+
+            // Hide button if all projects are revealed
+            if (projectsRevealed >= hiddenProjects.length) {
+                setTimeout(() => {
+                    loadMoreBtn.classList.add('hidden');
+                    showNotification('Tüm projeler yüklendi!', 'success');
+                }, projectsToReveal * 150 + 300);
+            } else {
+                // Update button text with remaining count
+                const remaining = hiddenProjects.length - projectsRevealed;
+                loadMoreBtn.innerHTML = `
+                    Daha Fazla Yükle (${remaining} kaldı)
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-left: 8px; vertical-align: middle;">
+                        <polyline points="6 9 12 15 18 9"></polyline>
+                    </svg>
+                `;
+            }
+        });
+    }
+
     // ========== CONSOLE MESSAGE ==========
     console.log('%c👋 Welcome to Farzet Portfolio!', 'font-size: 20px; font-weight: bold; color: #6366f1;');
     console.log('%cInterested in the code? Check out the GitHub repo!', 'font-size: 14px; color: #9ca3af;');
